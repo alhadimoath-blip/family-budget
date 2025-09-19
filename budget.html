@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>مشروع الميزانية العائلية | Family Budget Project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {font-family: Tahoma, Arial, sans-serif; margin:0; background:#fafafa;}
+    header {background:#4a90e2; color:white; text-align:center; padding:20px;}
+    h1 {margin:0;}
+    table {width:100%; border-collapse:collapse; margin:20px 0; font-size:14px;}
+    th, td {border:1px solid #ccc; padding:8px; text-align:center;}
+    th {background:#f0f0f0;}
+    input[type="number"] {width:70px; padding:5px; text-align:center;}
+    .green {color:#2e7d32; font-weight:bold;}
+    .yellow {color:#f9a825; font-weight:bold;}
+    .red {color:#c62828; font-weight:bold;}
+    .totals {background:#e1f5fe; font-weight:bold;}
+    #chartContainer {width:100%; max-width:700px; margin:auto;}
+    canvas {width:100%; height:auto;}
+    /* معلومات إضافية */
+    .summary-info {
+      background:#fff3e0; 
+      border:1px solid #ccc; 
+      padding:15px; 
+      margin:20px 0; 
+      font-size:15px;
+      line-height:1.8;
+    }
+    .positive {color:#2e7d32; font-weight:bold;}
+    .negative {color:#c62828; font-weight:bold;}
+    /* السلوغن */
+    .slogan-section {
+      background:#2e7d32; 
+      color:white; 
+      padding:30px; 
+      margin-top:40px;
+      text-align:center;
+      font-size:18px;
+      line-height:1.8;
+    }
+    .slogan-section span {color:#ffeb3b; font-weight:bold;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📊 مشروع الميزانية العائلية | Family Budget Project</h1>
+  </header>
+
+  <main style="padding:20px;">
+    <table id="budgetTable">
+      <thead>
+        <tr>
+          <th>البند<br>Category</th>
+          <th>الخطة<br>Plan</th>
+          <th>شراء 1<br>Purchase 1</th>
+          <th>شراء 2<br>Purchase 2</th>
+          <th>شراء 3<br>Purchase 3</th>
+          <th>شراء 4<br>Purchase 4</th>
+          <th>المجموع<br>Actual</th>
+          <th>الفرق<br>Difference</th>
+          <th>٪ من الخطة<br>%</th>
+          <th>المؤشر<br>Indicator</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>اللحوم والدجاج والسمك<br>Meat, Chicken, Fish</td>
+          <td>1300</td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>الخضار والفواكه<br>Vegetables & Fruits</td>
+          <td>725</td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>الخبز<br>Bread</td>
+          <td>100</td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>الأجبان والألبان والبيض<br>Dairy, Eggs</td>
+          <td>600</td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>الحبوب والبهارات<br>Grains & Spices</td>
+          <td>350</td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>المعلبات والمجمدات والزيوت<br>Canned, Frozen & Oil</td>
+          <td>400</td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>لوازم غسيل ملابس<br>Laundry Supplies</td>
+          <td>150</td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>لوازم غسالة الصحون<br>Dishwasher Supplies</td>
+          <td>150</td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>أدوات المطبخ<br>Kitchen Tools</td>
+          <td>50</td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>نظافة شخصية<br>Personal Care</td>
+          <td>400</td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>الطوارئ / الترفيه / العزائم<br>Emergency / Leisure / Hosting</td>
+          <td>775</td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td><input type="number" value="0"></td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr class="totals">
+          <td>الإجمالي<br>Total</td>
+          <td id="planTotal">5000</td>
+          <td colspan="4">—</td>
+          <td id="actualTotal">0</td>
+          <td id="diffTotal">0</td>
+          <td id="percentTotal">0%</td>
+          <td id="indicatorTotal"></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <!-- ملخص إضافي -->
+    <div class="summary-info" id="summaryBox">
+      <div>💰 <b>صافي الرصيد (Net Balance):</b> <span id="netBalance" class="positive">+5000 ريال</span></div>
+      <div>📊 <b>الخطة الإجمالية | Plan Total:</b> 5000 ريال</div>
+      <div>✅ <b>الحالة | Status:</b> <span id="statusText">ممتاز ضمن الخطة | Good</span></div>
+    </div>
+
+    <div id="chartContainer">
+      <canvas id="budgetChart"></canvas>
+    </div>
+  </main>
+
+  <!-- السلوغن -->
+  <section class="slogan-section">
+    ✨ <span>بيتنا مشروع حب وتعاون وذكاء مالي</span> ✨<br>
+    ✨ <span>Our home is a project of love, teamwork, and financial wisdom</span> ✨
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const table = document.getElementById('budgetTable');
+    const inputs = table.querySelectorAll('tbody input');
+    const planTotal = parseFloat(document.getElementById('planTotal').innerText);
+
+    function updateTable() {
+      let sumActual = 0;
+      const rows = table.querySelectorAll('tbody tr');
+      rows.forEach(row => {
+        const plan = parseFloat(row.cells[1].innerText);
+        const purchases = [
+          parseFloat(row.cells[2].querySelector('input').value) || 0,
+          parseFloat(row.cells[3].querySelector('input').value) || 0,
+          parseFloat(row.cells[4].querySelector('input').value) || 0,
+          parseFloat(row.cells[5].querySelector('input').value) || 0
+        ];
+        const actual = purchases.reduce((a,b)=>a+b,0);
+        const diff = actual - plan;
+        const percent = (actual / plan) * 100;
+
+        row.cells[6].innerText = actual.toFixed(0);
+        row.cells[7].innerText = diff.toFixed(0);
+        row.cells[8].innerText = percent.toFixed(0) + "%";
+        const indicatorCell = row.cells[9];
+        indicatorCell.className="";
+        if (percent <= 90) {
+          indicatorCell.innerHTML="✅";indicatorCell.classList.add('green');
+        } else if (percent<=110){
+          indicatorCell.innerHTML="🟡";indicatorCell.classList.add('yellow');
+        } else {
+          indicatorCell.innerHTML="🔴";indicatorCell.classList.add('red');
+        }
+
+        sumActual += actual;
+      });
+
+      // Totals
+      document.getElementById('actualTotal').innerText = sumActual.toFixed(0);
+      const diffTotal = sumActual - planTotal;
+      const percentTotal = (sumActual / planTotal) * 100;
+      document.getElementById('diffTotal').innerText = diffTotal.toFixed(0);
+      document.getElementById('percentTotal').innerText = percentTotal.toFixed(0) + "%";
+
+      const indicatorTotal = document.getElementById('indicatorTotal');
+      indicatorTotal.className="";
+      let status="ممتاز ضمن الخطة | Good";
+      if (percentTotal <= 90){
+        indicatorTotal.innerHTML="✅";indicatorTotal.classList.add('green');
+      } else if (percentTotal <=110){
+        indicatorTotal.innerHTML="🟡";indicatorTotal.classList.add('yellow');
+        status="قريب من الخطة | Watch";
+      } else {
+        indicatorTotal.innerHTML="🔴";indicatorTotal.classList.add('red');
+        status="تجاوز الخطة | Over Plan";
+      }
+
+      // Net Balance
+      const netBalanceValue = planTotal - sumActual;
+      const netBalanceSpan = document.getElementById('netBalance');
+      netBalanceSpan.innerText = netBalanceValue.toFixed(0) + " ريال";
+      if (netBalanceValue >= 0){
+        netBalanceSpan.className="positive";
+      } else {
+        netBalanceSpan.className="negative";
+      }
+
+      // Status update
+      document.getElementById('statusText').innerText=status;
+
+      updateChart(sumActual);
+    }
+
+    // Chart
+    const ctx = document.getElementById('budgetChart').getContext('2d');
+    const budgetChart = new Chart(ctx, {
+      type:'pie',
+      data:{
+        labels:['الخطة Plan','الصرف الفعلي Actual'],
+        datasets:[{
+          data:[planTotal,0],
+          backgroundColor:['#4caf50','#ff7043']
+        }]
+      },
+      options:{responsive:true, plugins:{legend:{position:'bottom'}}}
+    });
+
+    function updateChart(actual){
+      budgetChart.data.datasets[0].data=[planTotal,actual];
+      budgetChart.update();
+    }
+
+    inputs.forEach(input=>input.addEventListener('input',updateTable));
+    updateTable();
+  </script>
+</body>
+</html>
